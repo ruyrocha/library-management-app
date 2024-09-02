@@ -1,5 +1,11 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+require "rails_helper"
+
+RSpec.describe(User, type: :model) do
+  it "assigns `:member` as default role for new users" do
+    user = create(:user)
+
+    expect(user.is_member?).to(be_truthy)
+  end
 end

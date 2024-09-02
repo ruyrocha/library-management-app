@@ -246,6 +246,7 @@ GEM
       railties (>= 5.2)
     rexml (3.3.6)
       strscan
+    rolify (6.0.1)
     rouge (4.3.0)
     rspec-core (3.13.0)
       rspec-support (~> 3.13.0)
@@ -404,6 +405,7 @@ DEPENDENCIES
   importmap-rails
   puma (>= 5.0)
   rails (~> 7.2.1)
+  rolify (~> 6.0)
   rspec-rails
   rubocop
   rubocop-rails-omakase
