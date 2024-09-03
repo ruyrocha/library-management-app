@@ -6,6 +6,6 @@ FactoryBot.define do
     author { FFaker::Book.author }
     genre { FFaker::Book.genre }
     isbn { FFaker::Book.isbn }
-    total_copies { rand(50...50_000) }
+    total_copies { rand(2..10) }
   end
 end
