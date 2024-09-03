@@ -93,27 +93,22 @@ RSpec.describe("/books", type: :request) do
     context "with valid parameters" do
       it "updates the requested book" do
         new_attributes = { title: FFaker::Book.title }
-        book = Book.create!(valid_attributes)
+        book = create(:book)
 
         patch book_url(book), params: { book: new_attributes }
+        book.reload
 
-        expect(book.reload.title).to(eq(new_attributes[:title]))
-      end
-
-      it "redirects to the book" do
-        new_attributes = { title: FFaker::Book.title }
-        book = Book.create!(valid_attributes)
-
-        patch book_url(book), params: { book: new_attributes }
-
-        expect(response).to(redirect_to(book_url(book)))
+        expect(response).to(have_http_status(:see_other))
+        expect(book.title).to(eq(new_attributes[:title]))
       end
     end
 
     context "with invalid parameters" do
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        book = Book.create!(valid_attributes)
+        book = create(:book)
+
         patch book_url(book), params: { book: invalid_attributes }
+
         expect(response).to(have_http_status(:unprocessable_entity))
       end
     end

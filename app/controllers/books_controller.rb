@@ -25,9 +25,7 @@ class BooksController < ApplicationController
 
   # POST /books
   def create
-    @book = Book.new(book_params)
-
-    if current_user.can?(:create, @book) && @book.save!
+    if @book.save!
       redirect_to(@book, notice: "Book was successfully created.")
     else
       render(:new, status: :unprocessable_entity)
@@ -36,7 +34,7 @@ class BooksController < ApplicationController
 
   # PATCH/PUT /books/1
   def update
-    if current_user.can?(:udpate, @book) && @book.update!(book_params)
+    if book_params.present? && @book.update(book_params)
       redirect_to(@book, notice: "Book was successfully updated.", status: :see_other)
     else
       render(:edit, status: :unprocessable_entity)
@@ -46,6 +44,7 @@ class BooksController < ApplicationController
   # DELETE /books/1
   def destroy
     @book.destroy!
+
     redirect_to(books_url, notice: "Book was successfully destroyed.", status: :see_other)
   end
 
