@@ -3,11 +3,26 @@
 require "rails_helper"
 
 RSpec.describe("Dashboard", type: :request) do
-  describe "GET /index" do
-    it "returns the response body" do
-      get root_url
+  let(:user) { create(:user) }
 
-      expect(response).to(have_http_status(:ok))
+  describe "GET /index" do
+    context "when authenticated" do
+      it "returns the response body" do
+        sign_in(user)
+
+        get root_url
+
+        expect(response).to(have_http_status(:ok))
+      end
+    end
+
+    context "while not authenticated" do
+      it "redirects to sign in page" do
+        get root_url
+
+        expect(response).to(have_http_status(:found))
+        expect(response.location).to(eq(new_user_session_url))
+      end
     end
   end
 end
