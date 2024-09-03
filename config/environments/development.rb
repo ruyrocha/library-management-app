@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
@@ -51,6 +53,8 @@ Rails.application.configure do
 
   # Tell Active Support which deprecation messages to disallow.
   config.active_support.disallowed_deprecation_warnings = []
+
+  config.active_support.isolation_level = :fiber
 
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load

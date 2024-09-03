@@ -11,7 +11,7 @@
   <% content_for :title, "Books" %>
 
   <div class="flex justify-between items-center">
-    <% if can? :create, Book %>
+    <% if can? :create, @book %>
       <h1 class="font-bold text-4xl">Books</h1>
 
       <%= link_to "New book",

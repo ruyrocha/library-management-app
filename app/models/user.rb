@@ -13,6 +13,10 @@ class User < ApplicationRecord
 
   after_commit :assign_default_role, on: :create
 
+  delegate :can?, :cannot?, to: :ability
+
+  def ability = @ability ||= Ability.new(self)
+
   private
 
   def assign_default_role = add_role(:member)

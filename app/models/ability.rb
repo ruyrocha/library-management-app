@@ -30,10 +30,12 @@ class Ability
     # https://github.com/CanCanCommunity/cancancan/blob/develop/docs/define_check_abilities.md
     return unless user.present?
 
-    can(:read, :all)
+    return unless user.is_member?
+
+    can([:read], Book)
 
     return unless user.is_librarian?
 
-    can(:read, :create, :udpate, :destroy, Book)
+    can([:read, :create, :update, :destroy], Book)
   end
 end

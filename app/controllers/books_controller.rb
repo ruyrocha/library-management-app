@@ -7,7 +7,7 @@ class BooksController < ApplicationController
 
   # GET /books
   def index
-    @books = Book.all
+    @books = Book.accessible_by(current_ability)
   end
 
   # GET /books/1
@@ -27,7 +27,7 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
 
-    if @book.save
+    if current_user.can?(:create, @book) && @book.save!
       redirect_to(@book, notice: "Book was successfully created.")
     else
       render(:new, status: :unprocessable_entity)
@@ -36,7 +36,7 @@ class BooksController < ApplicationController
 
   # PATCH/PUT /books/1
   def update
-    if @book.update(book_params)
+    if current_user.can?(:udpate, @book) && @book.update!(book_params)
       redirect_to(@book, notice: "Book was successfully updated.", status: :see_other)
     else
       render(:edit, status: :unprocessable_entity)
