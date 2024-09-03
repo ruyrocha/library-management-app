@@ -7,7 +7,6 @@ class BooksController < ApplicationController
 
   # GET /books
   def index
-    @books = Book.accessible_by(current_ability)
   end
 
   # GET /books/1
