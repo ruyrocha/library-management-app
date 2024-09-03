@@ -16,4 +16,6 @@ class ApplicationController < ActionController::Base
   private
 
   def current_ability = @current_ability ||= ::Ability.new(current_user)
+
+  def api_request? = request.format.json?
 end

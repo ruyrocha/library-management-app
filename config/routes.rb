@@ -1,17 +1,23 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :users
-
-  resources :books, shallow: true do
-    resource :borrow, only: :create, controller: :borrowings
-    resource :return, only: :create, controller: :returnings
+  concern :books_management do
+    resources :books do
+      resource :borrow, only: :create, controller: :borrowings
+      resource :return, only: :create, controller: :returnings
+    end
   end
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  namespace :api do
+    namespace :v1, defaults: { format: "json" } do
+      concerns :books_management
+    end
+  end
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  devise_for :users
+
+  concerns :books_management
+
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Render dynamic PWA files from app/views/pwa/*
