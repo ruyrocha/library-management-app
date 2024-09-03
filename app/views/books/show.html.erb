@@ -22,6 +22,14 @@
         data: { turbo_method: :post },
         class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
 
+
+    <% if can? :update, @book %>
+      <%= link_to "Return this book",
+          book_return_path(@book),
+          data: { turbo_method: :post },
+          class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <% end %>
+
     <%= link_to "Back to books",
         books_path,
         class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
