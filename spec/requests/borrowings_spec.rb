@@ -10,7 +10,7 @@ RSpec.describe("Borrowings", type: :request) do
 
       sign_in(user)
 
-      expect { post(book_borrow_path(book)) }.to(change(Inventory, :count).by(1))
+      expect { post(book_borrow_path(book)) }.to(change(ActivityLog, :count).by(1))
     end
   end
 end

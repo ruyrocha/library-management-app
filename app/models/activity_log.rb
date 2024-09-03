@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Inventory < ApplicationRecord
+class ActivityLog < ApplicationRecord
   belongs_to :user
   belongs_to :book
 
@@ -15,8 +15,7 @@ class Inventory < ApplicationRecord
   private
 
   def decrease_book_total_copies_by_one
-    total_copies = book.total_copies
-    book.update!(total_copies: total_copies - 1)
+    book.update!(total_copies: book.total_copies - 1)
   end
 
   def set_borrowed_at = self.borrowed_at = Time.current

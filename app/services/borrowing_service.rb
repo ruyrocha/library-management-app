@@ -2,11 +2,10 @@
 
 class BorrowingService
   def initialize(book:, user:)
-    @inventory = Inventory.new
-    @inventory.book = book
-    @inventory.user = user
+    @activity_log = ActivityLog.new
+    @activity_log.book = book
+    @activity_log.user = user
   end
 
-  def call = @inventory.save!
+  def call = @activity_log.save!
 end
-
