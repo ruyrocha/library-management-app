@@ -1,9 +1,8 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :inventory do
-    user { nil }
-    book { nil }
-    borrowed_at { "2024-09-02 22:44:24" }
-    returned_at { "2024-09-02 22:44:24" }
-    due_at { "2024-09-02 22:44:24" }
+    user
+    book
   end
 end

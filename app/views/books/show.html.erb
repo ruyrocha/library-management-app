@@ -16,9 +16,15 @@
       edit_book_path(@book),
       class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <% end %>
+
+    <%= link_to "Borrow this book",
+        book_borrow_path(@book),
+        data: { turbo_method: :post },
+        class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+
     <%= link_to "Back to books",
-    books_path,
-    class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+        books_path,
+        class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
 
     <% if can? :destroy, @book %>
       <div class="inline-block ml-2">
