@@ -15,6 +15,9 @@ class User < ApplicationRecord
 
   delegate :can?, :cannot?, to: :ability
 
+  has_many :activity_logs
+  has_many :books, through: :activity_logs
+
   def ability = @ability ||= Ability.new(self)
 
   private
