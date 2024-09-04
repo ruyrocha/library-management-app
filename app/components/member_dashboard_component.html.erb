@@ -2,7 +2,7 @@
   <header class="mb-6">
     <h1 class="text-3xl font-bold text-blue-700">Member Dashboard</h1>
   </header>
-
+  <!-- Books Borrowed Section -->
   <section
     class="bg-white shadow-md rounded-lg p-6 mb-6"
     data-testid="books-borrowed-section"
@@ -11,9 +11,9 @@
     <% if @presenter.books.empty? %>
       <p class="text-gray-600" data-testid="no-borrowed-books">You have not borrowed any books.</p>
     <% else %>
-      <ul class="list-disc pl-5">
+      <ul class="list-disc pl-5 space-y-3">
         <% @presenter.books.each do |log| %>
-          <li class="mb-3" data-testid="borrowed-book">
+          <li data-testid="borrowed-book">
             <div
               class="
                 flex items-center justify-between p-4 border border-gray-200 rounded-lg
@@ -29,15 +29,18 @@
       </ul>
     <% end %>
   </section>
-
-  <section class="bg-white shadow-md rounded-lg p-6" data-testid="books-overdue-section">
+  <!-- Overdue Books Section -->
+  <section
+    class="bg-white shadow-md rounded-lg p-6"
+    data-testid="books-overdue-section"
+  >
     <h2 class="text-xl font-semibold text-gray-800 mb-4">Overdue Books</h2>
     <% if @presenter.overdue_books.empty? %>
       <p class="text-gray-600" data-testid="no-overdue-books">You have no overdue books.</p>
     <% else %>
-      <ul class="list-disc pl-5">
+      <ul class="list-disc pl-5 space-y-3">
         <% @presenter.overdue_books.each do |log| %>
-          <li class="mb-3" data-testid="overdue-book">
+          <li data-testid="overdue-book">
             <div
               class="
                 flex items-center justify-between p-4 border border-red-200 rounded-lg shadow-sm
