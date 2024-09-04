@@ -3,8 +3,6 @@
 class User < ApplicationRecord
   rolify
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
     :registerable,
     :recoverable,
@@ -15,7 +13,7 @@ class User < ApplicationRecord
 
   delegate :can?, :cannot?, to: :ability
 
-  has_many :activity_logs
+  has_many :activity_logs, dependent: :destroy
   has_many :books, through: :activity_logs
 
   def ability = @ability ||= Ability.new(self)

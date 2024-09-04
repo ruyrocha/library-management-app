@@ -1,11 +1,78 @@
 # frozen_string_literal: true
 
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+if Book.count.zero?
+
+  BOOKS = [
+    {
+      title: "To Kill a Mockingbird",
+      author: "Harper Lee",
+      genre: "Fiction",
+      isbn: "978-0060935467",
+    },
+    {
+      title: "1984",
+      author: "George Orwell",
+      genre: "Dystopian Fiction",
+      isbn: "978-0451524935",
+    },
+    {
+      title: "The Catcher in the Rye",
+      author: "J.D. Salinger",
+      genre: "Fiction",
+      isbn: "978-0316769488",
+    },
+    {
+      title: "Pride and Prejudice",
+      author: "Jane Austen",
+      genre: "Romance",
+      isbn: "978-1503290563",
+    },
+    {
+      title: "The Great Gatsby",
+      author: "F. Scott Fitzgerald",
+      genre: "Fiction",
+      isbn: "978-0743273565",
+    },
+    {
+      title: "The Lord of the Rings",
+      author: "J.R.R. Tolkien",
+      genre: "Fantasy",
+      isbn: "978-0261102385",
+    },
+    {
+      title: "Harry Potter and the Philosopher's Stone",
+      author: "J.K. Rowling",
+      genre: "Fantasy",
+      isbn: "978-0747532699",
+    },
+    {
+      title: "The Diary of a Young Girl",
+      author: "Anne Frank",
+      genre: "Biography",
+      isbn: "978-0553296983",
+    },
+    {
+      title: "The Alchemist",
+      author: "Paulo Coelho",
+      genre: "Fiction",
+      isbn: "978-0062315007",
+    },
+    {
+      title: "The Hobbit",
+      author: "J.R.R. Tolkien",
+      genre: "Fantasy",
+      isbn: "978-0261102217",
+    },
+  ].freeze
+
+  BOOKS.each { |book| Book.create!(book.merge(total_copies: 2)) }
+end
+
+if User.count.zero?
+  PASSWORD = "abcde123456"
+  # member
+  User.create!(email: "member@example.com", password: PASSWORD)
+  # librarian
+  librarian = User.create!(email: "librarian@example.com", password: PASSWORD)
+  librarian.add_role(:librarian)
+end
