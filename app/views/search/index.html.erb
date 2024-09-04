@@ -5,9 +5,12 @@
     <ul class="space-y-4 mt-4">
       <% @books.each do |book| %>
         <%= render BookComponent.new(book: book) %>
+        <p>
+          <%= link_to "Show this book",
+          book,
+          class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+        </p>
       <% end %>
     </ul>
-  <% else %>
-    <p class="mt-4">No results.</p>
   <% end %>
 </div>

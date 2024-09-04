@@ -2,7 +2,7 @@
   <header class="mb-6">
     <h1 class="text-3xl font-bold text-blue-700">Librarian Dashboard</h1>
   </header>
-
+  <!-- Library Overview Section -->
   <section class="bg-white shadow-md rounded-lg p-6 mb-6">
     <h2 class="text-xl font-semibold text-gray-800 mb-4">Library Overview</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -24,13 +24,17 @@
       </div>
     </div>
   </section>
-
+  <!-- Members with Overdue Books Section -->
   <section class="bg-white shadow-md rounded-lg p-6">
     <h2 class="text-xl font-semibold text-gray-800 mb-4">Members with Overdue Books</h2>
-    <ul class="list-disc pl-5">
-      <% @presenter.members_with_overdue_books.each do |member| %>
-        <li class="text-lg text-gray-700 mb-2"><%= member.email %></li>
-      <% end %>
-    </ul>
+    <% if @presenter.members_with_overdue_books.empty? %>
+      <p class="text-gray-600">No members have overdue books at the moment.</p>
+    <% else %>
+      <ul class="list-disc pl-5 space-y-2">
+        <% @presenter.members_with_overdue_books.each do |member| %>
+          <li class="text-lg text-gray-700 mb-2"><%= member.email %></li>
+        <% end %>
+      </ul>
+    <% end %>
   </section>
 </div>
