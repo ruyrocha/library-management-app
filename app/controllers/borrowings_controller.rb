@@ -4,7 +4,20 @@ class BorrowingsController < ApplicationController
   before_action :load_book, only: :create
 
   def create
-    BorrowingService.new(book: @book, user: current_user).call
+    if BorrowingService.new(book: @book, user: current_user).call
+      respond_to do |format|
+        format.html { redirect_to(@book, notice: "Book was successfully borrowed.") }
+        format.json { render(json: @book, status: :created) }
+      end
+    else
+      respond_to do |format|
+        # TODO: fix it.
+        format.turbo_stream do
+          render(turbo_stream: turbo_stream.replace(@book, partial: "books/form", locals: { book: @book }))
+        end
+        format.json { render(json: @book.errors, status: :unprocessable_entity) }
+      end
+    end
   end
 
   private
