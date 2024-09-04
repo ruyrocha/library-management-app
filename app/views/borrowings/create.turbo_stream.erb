@@ -1,0 +1,9 @@
+<% if @book.errors.any? %>
+  <%= turbo_stream.replace "book" do %>
+    <%= render partial: "form", locals: { book: @book } %>
+  <% end %>
+<% else %>
+  <%= turbo_stream.replace "book" do %>
+    <%= render partial: "books/show", locals: { book: @book } %>
+  <% end %>
+<% end %>

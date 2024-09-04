@@ -8,14 +8,17 @@ class BorrowingsController < ApplicationController
       respond_to do |format|
         format.html { redirect_to(@book, notice: "Book was successfully borrowed.") }
         format.json { render(json: @book, status: :created) }
+        format.turbo_stream do
+          render(turbo_stream: turbo_stream.replace("book", partial: "books/borrowed", locals: { book: @book }))
+        end
       end
     else
       respond_to do |format|
-        # TODO: fix it.
-        format.turbo_stream do
-          render(turbo_stream: turbo_stream.replace(@book, partial: "books/form", locals: { book: @book }))
-        end
+        format.html { render(:new) }
         format.json { render(json: @book.errors, status: :unprocessable_entity) }
+        format.turbo_stream do
+          render(turbo_stream: turbo_stream.replace("book", partial: "books/form", locals: { book: @book }))
+        end
       end
     end
   end
