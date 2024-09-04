@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Set the global default log level
 SemanticLogger.default_level = :trace
 
