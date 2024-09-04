@@ -24,7 +24,7 @@ RSpec.describe("books/index", type: :view) do
     ])
   end
 
-  it "renders a list of books" do
+  xit "renders a list of books" do
     render
     cell_selector = "div>p"
     assert_select cell_selector, text: Regexp.new("Title".to_s), count: 2

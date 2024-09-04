@@ -2,38 +2,23 @@
 
 class BooksSearchQuery
   def initialize(search_params = {})
-    @title = search_params.delete(:title)
-    @author = search_params.delete(:author)
-    @genre = search_params.delete(:genre)
+    @query = search_params.delete(:query)
     @relation = Book
   end
 
   def call
-    @relation = by_title if @title
-    @relation = by_author if @author
-    @relation = by_genre if @genre
-    @relation.all
-  end
+    query = "%#{@query.downcase}%"
 
-  def by_title
-    @relation.where(
-      Book.arel_table[:title].lower.matches("%#{@title.downcase}%"),
-    )
-  end
+    title_condition = Book.arel_table[:title].lower.matches(query)
+    author_condition = Book.arel_table[:author].lower.matches(query)
+    genre_condition = Book.arel_table[:genre].lower.matches(query)
 
-  def by_author
     @relation.where(
-      Book.arel_table[:author].lower.matches("%#{@author.downcase}%"),
-    )
-  end
-
-  def by_genre
-    @relation.where(
-      Book.arel_table[:genre].lower.matches("%#{@genre.downcase}%"),
+      title_condition.or(author_condition).or(genre_condition),
     )
   end
 
   private
 
-  attr_reader :title, :author, :genre, :relation
+  attr_reader :query, :relation
 end

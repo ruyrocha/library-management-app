@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
   concerns :books_management
 
+  get "search", controller: :search, action: :index
+
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Render dynamic PWA files from app/views/pwa/*

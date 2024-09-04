@@ -20,16 +20,20 @@
     <% end %>
   </div>
 
-  <div id="books" class="min-w-full">
-    <% @books.each do |book| %>
-      <% if can? :read, book %>
-        <%= render book %>
-        <p>
+  <% if can? :read, Book %>
+    <% if @books.any? %>
+      <ul class="space-y-4 mt-4">
+        <% @books.each do |book| %>
+          <%= render BookComponent.new(book: book) %>
+          <p>
           <%= link_to "Show this book",
           book,
           class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-        </p>
-      <% end %>
+          </p>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="mt-4">No books found</p>
     <% end %>
-  </div>
+  <% end %>
 </div>
