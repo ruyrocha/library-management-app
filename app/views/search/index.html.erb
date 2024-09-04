@@ -1,0 +1,13 @@
+<div class="container mx-auto p-6">
+  <%= render(SearchFormComponent.new) %>
+
+  <% if @books && @books.any? %>
+    <ul class="space-y-4 mt-4">
+      <% @books.each do |book| %>
+        <%= render BookComponent.new(book: book) %>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="mt-4">No results.</p>
+  <% end %>
+</div>

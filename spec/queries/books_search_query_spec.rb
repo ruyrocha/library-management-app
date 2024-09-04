@@ -7,7 +7,7 @@ RSpec.describe(BooksSearchQuery) do
     book1 = create(:book, title: "one")
     book2 = create(:book, title: "two")
 
-    exercise = described_class.new(title: "ONE").call
+    exercise = described_class.new(query: "ONE").call
 
     expect(exercise).to(include(book1))
     expect(exercise).not_to(include(book2))
@@ -17,7 +17,7 @@ RSpec.describe(BooksSearchQuery) do
     book1 = create(:book, author: "one")
     book2 = create(:book, author: "two")
 
-    exercise = described_class.new(author: "ONE").call
+    exercise = described_class.new(query: "ONE").call
 
     expect(exercise).to(include(book1))
     expect(exercise).not_to(include(book2))
@@ -27,22 +27,9 @@ RSpec.describe(BooksSearchQuery) do
     book1 = create(:book, genre: "one")
     book2 = create(:book, genre: "two")
 
-    exercise = described_class.new(genre: "ONE").call
+    exercise = described_class.new(query: "ONE").call
 
     expect(exercise).to(include(book1))
     expect(exercise).not_to(include(book2))
-  end
-
-  it "searches books by title, author and genre" do
-    create_list(:book, 5)
-    wanted_book = Book.first
-
-    exercise = described_class.new(
-      title: wanted_book.title,
-      author: wanted_book.author,
-      genre: wanted_book.genre,
-    ).call
-
-    expect(exercise).to(include(wanted_book))
   end
 end

@@ -1,0 +1,6 @@
+<div class="p-6 bg-gray-100 rounded-lg shadow-md">
+  <%= form_with url: search_path, method: :get, class: "flex flex-col space-y-4" do %>
+    <input type="text" name="query" placeholder="Search by title, author, or genre" class="p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Search</button>
+  <% end %>
+</div>
