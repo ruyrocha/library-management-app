@@ -14,6 +14,10 @@ module Api
         respond_with(@books)
       end
 
+      def show
+        respond_with(@book)
+      end
+
       private
 
       # Only allow a list of trusted parameters through.
