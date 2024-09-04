@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class LibrarianDashboardQuery
-  def self.call = new.call
+  class << self
+    def call = new.call
+  end
 
   def call
     {
