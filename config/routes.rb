@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  devise_for :users
+
   concern :books_management do
     resources :books do
       resource :borrow, only: :create, controller: :borrowings
@@ -13,8 +15,6 @@ Rails.application.routes.draw do
       concerns :books_management
     end
   end
-
-  devise_for :users
 
   concerns :books_management
 
