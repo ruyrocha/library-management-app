@@ -122,6 +122,10 @@ Manual tests performed using HTTPie.
 
 ![Screenshot from 2024-09-04 12-12-35](https://github.com/user-attachments/assets/6d00e84f-c64d-4d24-962b-44735908eb0e)
 
+#### POST /api/v1/books/:id/borrow
+
+![Screenshot from 2024-09-04 13-04-09](https://gist.github.com/user-attachments/assets/fb9c7fd2-1abf-41d3-8d24-cc029a6bab1e)
+
 ## Frontend
 
 - ~~Fulls of TODOs and bugs~~
