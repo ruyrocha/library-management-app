@@ -8,6 +8,15 @@
     ><%= notice %></p>
   <% end %>
 
+  <% if alert.present? %>
+    <p
+      class="
+        py-2 px-3 bg-orange-50 mb-5 text-orange-500 font-medium rounded-lg inline-block
+      "
+      id="alert"
+    ><%= alert %></p>
+  <% end %>
+
   <% content_for :title, "Books" %>
 
   <div class="flex justify-between items-center">

@@ -74,5 +74,6 @@ if User.count.zero?
   User.create!(email: "member@example.com", password: PASSWORD)
   # librarian
   librarian = User.create!(email: "librarian@example.com", password: PASSWORD)
+  librarian.remove_role(:member)
   librarian.add_role(:librarian)
 end
