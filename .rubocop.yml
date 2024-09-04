@@ -1,2 +1,9 @@
 inherit_gem:
   rubocop-shopify: rubocop.yml
+Lint/MissingSuper:
+  Exclude:
+    - "app/components/**/*"
+Layout/LineLength:
+  Exclude:
+    - "bin/**/*"
+    - "config/initializers/devise.rb"

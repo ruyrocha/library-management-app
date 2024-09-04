@@ -1,13 +1,15 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-RSpec.describe "books/new", type: :view do
+require "rails_helper"
+
+RSpec.describe("books/new", type: :view) do
   before(:each) do
     assign(:book, Book.new(
       title: "MyString",
       author: "MyString",
       genre: "MyString",
       isbn: "MyString",
-      total_copies: 1
+      total_copies: 1,
     ))
   end
 
@@ -15,7 +17,6 @@ RSpec.describe "books/new", type: :view do
     render
 
     assert_select "form[action=?][method=?]", books_path, "post" do
-
       assert_select "input[name=?]", "book[title]"
 
       assert_select "input[name=?]", "book[author]"
