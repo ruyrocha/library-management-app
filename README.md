@@ -129,3 +129,4 @@ Manual tests performed using HTTPie.
 ## Frontend
 
 - ~~Fulls of TODOs and bugs~~
+
