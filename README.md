@@ -13,6 +13,43 @@ Or if you don't want to play with odd views, just run the test suite:
 bundle exec rspec --format documentation
 ```
 
+## API Endpoints
+
+- Develop a RESTful API that allows CRUD operations for books and borrowings.
+- Ensure proper status codes and responses for each endpoint.
+- Testing should be done with RSPEC. i. Spec files should be included for all
+  the requirements above.
+  - manual test with curl can be performed using the credentials you may have
+    set on `.env`
+
+### Screenshots
+
+Manual tests performed using HTTPie.
+
+#### GET /api/v1/books
+
+![Screenshot from 2024-09-04 12-09-53](https://github.com/user-attachments/assets/b18186db-af32-4989-a4ea-96905bc57ace)
+
+#### GET /api/v1/books/:id
+
+![Screenshot from 2024-09-04 12-10-14](https://github.com/user-attachments/assets/edac30f6-24a7-434d-963c-8421d23d0187)
+
+#### PUT/PATCH /api/v1/books/:id
+
+![Screenshot from 2024-09-04 12-11-03](https://github.com/user-attachments/assets/e35cc6f3-ca34-426d-8396-3e5beabd3dd5)
+
+#### POST /api/v1/books
+
+![Screenshot from 2024-09-04 12-11-52](https://github.com/user-attachments/assets/00301bef-c1fa-4d01-94e5-d5ef7e2cc25c)
+
+#### DELETE /api/v1/books/:id
+
+![Screenshot from 2024-09-04 12-12-35](https://github.com/user-attachments/assets/6d00e84f-c64d-4d24-962b-44735908eb0e)
+
+#### POST /api/v1/books/:id/borrow
+
+![Screenshot from 2024-09-04 13-04-09](https://gist.github.com/user-attachments/assets/fb9c7fd2-1abf-41d3-8d24-cc029a6bab1e)
+
 ## Authentication and Authorization
 
 - Users should be able to register, log in, and log out.
@@ -88,39 +125,6 @@ bundle exec rspec --format documentation
 ### Screenshots
 
 ![Screenshot from 2024-09-04 11-19-31](https://github.com/user-attachments/assets/ea5be56d-688b-464c-a543-4b9700fa8799)
-
-## API Endpoints
-
-- Develop a RESTful API that allows CRUD operations for books and borrowings.
-- Ensure proper status codes and responses for each endpoint.
-- Testing should be done with RSPEC. i. Spec files should be included for all
-  the requirements above.
-  - manual test with curl can be performed using the credentials you may have
-    set on `.env`
-
-### Screenshots
-
-Manual tests performed using HTTPie.
-
-#### GET /api/v1/books
-
-![Screenshot from 2024-09-04 12-09-53](https://github.com/user-attachments/assets/b18186db-af32-4989-a4ea-96905bc57ace)
-
-#### GET /api/v1/books/:id
-
-![Screenshot from 2024-09-04 12-10-14](https://github.com/user-attachments/assets/edac30f6-24a7-434d-963c-8421d23d0187)
-
-#### PUT/PATCH /api/v1/books/:id
-
-![Screenshot from 2024-09-04 12-11-03](https://github.com/user-attachments/assets/e35cc6f3-ca34-426d-8396-3e5beabd3dd5)
-
-#### POST /api/v1/books
-
-![Screenshot from 2024-09-04 12-11-52](https://github.com/user-attachments/assets/00301bef-c1fa-4d01-94e5-d5ef7e2cc25c)
-
-#### DELETE /api/v1/books/:id
-
-![Screenshot from 2024-09-04 12-12-35](https://github.com/user-attachments/assets/6d00e84f-c64d-4d24-962b-44735908eb0e)
 
 ## Frontend
 
