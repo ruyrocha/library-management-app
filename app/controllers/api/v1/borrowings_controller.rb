@@ -7,7 +7,7 @@ module Api
 
       before_action :load_book, only: :create
 
-      rescue_from ActiveRecord::RecordInvalid do |exception|
+      rescue_from ActiveRecord::RecordInvalid do |_|
         respond_to do |format|
           format.json { head :not_acceptable }
         end
