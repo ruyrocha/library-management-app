@@ -313,7 +313,7 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    semantic_logger (4.16.0)
+    semantic_logger (4.16.1)
       concurrent-ruby (~> 1.0)
     sorbet-runtime (0.5.11553)
     sprockets (4.2.1)
