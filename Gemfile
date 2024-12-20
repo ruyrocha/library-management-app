@@ -80,4 +80,4 @@ gem "rolify", "~> 6.0"
 
 gem "cancancan", "~> 3.6"
 
-gem "view_component", "~> 3.20"
+gem "view_component", "~> 3.21"
