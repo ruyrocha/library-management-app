@@ -68,7 +68,7 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
-  gem "selenium-webdriver"
+  gem "selenium-webdriver", "~> 4.36"
   gem "database_cleaner-active_record"
 end
 
@@ -80,4 +80,4 @@ gem "rolify", "~> 6.0"
 
 gem "cancancan", "~> 3.6"
 
-gem "view_component", "~> 3.23"
+gem "view_component", "~> 4.0"
