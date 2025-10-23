@@ -51,8 +51,9 @@ jobs:
       - name: Configure Gemini settings (if secret present)
         if: ${{ secrets.GEMINI_API_KEY != '' }}
         run: |
-          mkdir -p "$HOME/.gemini"
-          printf '{"api_key":"%s"}' "$GEMINI_API_KEY" > "$HOME/.gemini/settings.json"
+          mkdir -p "/home/runner/.gemini"
+          printf '{"gemini_api_key":"%s"}' "$GEMINI_API_KEY" > "/home/runner/.gemini/settings.json"
+          chmod 0600 /home/runner/.gemini/settings.json
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
