@@ -41,21 +41,23 @@ jobs:
       - name: 'Checkout repository'
         uses: 'actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8' # ratchet:actions/checkout@v5
 
-      - name: Fail if GEMINI_API_KEY secret missing
-        run: |
-          if [ -z "${{ secrets.GEMINI_API_KEY }}" ]; then
-            echo "GEMINI_API_KEY secret is missing or empty. Aborting."
-            exit 1
-          fi
+      # Mask the secret so it won't show in logs if accidentally printed
+      - name: Mask GEMINI API key
+        if: ${{ secrets.GEMINI_API_KEY != '' }}
+        run: echo "::add-mask::${GEMINI_API_KEY}"
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
-      - name: Write Gemini settings file
+      - name: Configure Gemini settings (if secret present)
+        if: ${{ secrets.GEMINI_API_KEY != '' }}
         run: |
-          mkdir -p ~/.gemini
-          # write a minimal settings file from the secret; adjust JSON keys to match what your gemini CLI expects
-          printf '%s\n' "{\"auth_method\":\"api_key\",\"api_key\":\"${{ secrets.GEMINI_API_KEY }}\"}" > ~/.gemini/settings.json
-          chmod 600 ~/.gemini/settings.json
+          mkdir -p "$HOME/.gemini"
+          printf '{"api_key":"%s"}' "$GEMINI_API_KEY" > "$HOME/.gemini/settings.json"
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
       - name: 'Run Gemini pull request review'
+        if: ${{ secrets.GEMINI_API_KEY != '' }}
         uses: 'google-github-actions/run-gemini-cli@v0' # ratchet:exclude
         id: 'gemini_pr_review'
         env:
@@ -65,12 +67,12 @@ jobs:
           PULL_REQUEST_NUMBER: '${{ github.event.pull_request.number || github.event.issue.number }}'
           REPOSITORY: '${{ github.repository }}'
           ADDITIONAL_CONTEXT: '${{ inputs.additional_context }}'
-          GEMINI_API_KEY: '${{ secrets.GEMINI_API_KEY }}'
         with:
           gcp_location: '${{ vars.GOOGLE_CLOUD_LOCATION }}'
           gcp_project_id: '${{ vars.GOOGLE_CLOUD_PROJECT }}'
           gcp_service_account: '${{ vars.SERVICE_ACCOUNT_EMAIL }}'
           gcp_workload_identity_provider: '${{ vars.GCP_WIF_PROVIDER }}'
+          gemini_api_key: '${{ secrets.GEMINI_API_KEY }}'
           gemini_cli_version: '${{ vars.GEMINI_CLI_VERSION }}'
           gemini_debug: '${{ fromJSON(vars.DEBUG || vars.ACTIONS_STEP_DEBUG || false) }}'
           gemini_model: '${{ vars.GEMINI_MODEL }}'
@@ -106,8 +108,7 @@ jobs:
                     "submit_pending_pull_request_review"
                   ],
                   "env": {
-                    "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}",
-                    "GEMINI_API_KEY": "${GEMINI_API_KEY}"
+                    "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
                   }
                 }
               },
