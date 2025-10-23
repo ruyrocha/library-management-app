@@ -41,25 +41,9 @@ jobs:
       - name: 'Checkout repository'
         uses: 'actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8' # ratchet:actions/checkout@v5
 
-      # Mask the secret so it won't show in logs if accidentally printed
-      - name: Mask GEMINI API key
-        if: ${{ secrets.GEMINI_API_KEY != '' }}
-        run: echo "::add-mask::${GEMINI_API_KEY}"
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-
-      - name: Configure Gemini settings (if secret present)
-        if: ${{ secrets.GEMINI_API_KEY != '' }}
-        run: |
-          mkdir -p "/home/runner/.gemini"
-          printf '{"gemini_api_key":"%s"}' "$GEMINI_API_KEY" > "/home/runner/.gemini/settings.json"
-          chmod 0600 /home/runner/.gemini/settings.json
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-
       - name: 'Run Gemini pull request review'
         if: ${{ secrets.GEMINI_API_KEY != '' }}
-        uses: 'google-github-actions/run-gemini-cli@v0' # ratchet:exclude
+        uses: 'google-github-actions/run-gemini-cli@v0.1.13' # ratchet:exclude
         id: 'gemini_pr_review'
         env:
           GITHUB_TOKEN: '${{ steps.mint_identity_token.outputs.token || secrets.GITHUB_TOKEN || github.token }}'
